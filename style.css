@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Mitr&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container h1,h2,h3,p {
+    font-family: "Mitr", sans-serif;
+}
+
