@@ -22,7 +22,7 @@
 
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">LuxSolar.EN</a>
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-auto me-md-auto link-body-emphasis text-decoration-none">LuxSolar.EN</a>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
             </ul>
@@ -35,7 +35,7 @@
 
         <div class="text-center">
             <h3>แผงโซลาร์เซลล์ที่เลือก</h3>
-            <p>ขนาดแผงโซลาร์เซลล์: <span id="display-panel-size"></span> วัตต์ || จำนวนแผงโซลาร์เซลล์: <span id="display-panel-quantity"></span> แผง</p>
+            <p>ขนาด : <span id="display-panel-size"></span> วัตต์ || จำนวน : <span id="display-panel-quantity"></span> แผง</p>
         </div>
 
         <div class="px-4 py-2 text-center">
@@ -44,8 +44,8 @@
                     <select class="form-select custom-select" id="battery-size">
                         <option value="0">เลือกขนาดของแบตเตอรี่ :</option>
                         <option value="100">battery 100 ah - 5190 บาท</option>
-                        <option value="300">battery 150 ah - 7290 บาท</option>
-                        <option value="300">battery 200 ah - 8890 บาท</option>
+                        <option value="150">battery 150 ah - 7290 บาท</option>
+                        <option value="200">battery 200 ah - 8890 บาท</option>
                         <option value="300">battery 300 ah - 9900 บาท</option>
                     </select>
                 </div>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="px-4 py-2 text-center">
-            <a class="btn btn-outline-secondary btn-lg px-4 rounded-pill" type="button" href="homesum.html" onclick="saveSelections()"> Next > </a>
+            <a id="next-button" class="btn btn-outline-success btn-lg px-4 rounded-pill" type="button" href="homesum.html" onclick="checkCalculation()"> Next > </a>
         </div>
 
         <footer class="py-3 my-4">
@@ -82,6 +82,8 @@
             document.getElementById('display-panel-quantity').textContent = localStorage.getItem('panelQuantity');
         });
 
+        let priceCalculated = false;
+
         function calculateTotal() {
             const batteryPrices = {
                 '100': 5190,
@@ -90,7 +92,7 @@
                 '300': 9900
             };
             const inverterPrices = {
-                '1000': 2990,
+                '1000': 2290,
                 '1500': 2790,
                 '2000': 4290,
                 '3000': 6190
@@ -99,9 +101,14 @@
             const batterySize = document.getElementById('battery-size').value;
             const inverterSize = document.getElementById('inverter-size').value;
 
-            const totalPrice = batteryPrices[batterySize] + inverterPrices[inverterSize];
-            
-            document.getElementById('total-price').textContent = `รวมราคาสินค้า : ${totalPrice} บาท`;
+            if (batterySize !== '0' && inverterSize !== '0') {
+                const totalPrice = batteryPrices[batterySize] + inverterPrices[inverterSize];
+                document.getElementById('total-price').textContent = `รวมราคาสินค้า : ${totalPrice} บาท`;
+                priceCalculated = true;
+            } else {
+                document.getElementById('total-price').textContent = 'กรุณาเลือกขนาดของแบตเตอรี่และอินเวอร์เตอร์';
+                priceCalculated = false;
+            }
         }
 
         function saveSelections() {
@@ -110,6 +117,16 @@
 
             localStorage.setItem('batterySize', batterySize);
             localStorage.setItem('inverterSize', inverterSize);
+        }
+
+        function checkCalculation() {
+            if (priceCalculated) {
+                saveSelections();
+                document.getElementById('next-button').href = "homesum.html";
+            } else {
+                alert('กรุณาคำนวณราคาก่อนที่จะไปหน้าถัดไป');
+                document.getElementById('next-button').href = "#";
+            }
         }
     </script>
 </body>

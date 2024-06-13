@@ -5,7 +5,7 @@
     padding: 0;
     box-sizing: border-box;
 }
-.container h1,h2,h3,p,a,td,th,h5 {
+.container h1,h2,h3,p,a,td,th,h4 {
     font-family: "Mitr", sans-serif;
 }
 

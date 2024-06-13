@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,7 @@
 
         <div class="px-4 py-2 my-5 text-center">
             <img class="d-block mx-auto mb-4" src="buen.png" alt="" width="442" height="127">
-            <h1 class="display-5 fw-bold text-body-emphasis">โปรแกรมการคำนวณระบบโซลาร์เซลล์</h1>
+            <h1 class="display-5 fw-bold text-body-emphasis">โปรแกรมการคำนวณระบบโซลาร์เซลล์</h1> <br />
         </div>
 
         <div class="px-4 py-2 my-5 text-center">
@@ -31,42 +31,46 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title" id="roomName"></h5>
-                        <p class="card-text" id="roomSize"></p>
+                        <h4 class="card-title" id="roomName"></h4>
+                        <p  class="card-text" id="roomSize"></p>
+                        <p  class="card-text">วัตต์รวม : <span id="totalWattage">0</span> วัตต์ / ชั่วโมง</p>
+                        <p  class="card-text">ค่าไฟ <span id="costPerHour">0</span> บาท/ชั่วโมง : ค่าไฟ <span id="costPerDay">0</span> บาท/วัน</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <ul class="list-group mt-3" id="selectedDevicesList"></ul>
-
-        <div class="px-4 py-2 text-center">
-            <a class="btn btn-outline-secondary btn-lg px-4 rounded-pill" type="button" href="index.html" onclick="saveSelections()"> Home > </a>
-        </div>
-
-        <footer class="py-3 my-4">
-            <p class="text-center text-body-secondary"><br />© 2023 SCHOOL OF ENGINEERING<br /> BANGKOK UNIVERSITY</p>
-        </footer>
-    </div>
-
     <script>
-        var roomName = sessionStorage.getItem('roomName');
-        var roomSize = sessionStorage.getItem('roomSize');
+        document.addEventListener('DOMContentLoaded', function() {
+            const totalWattage = localStorage.getItem('totalWattage');
+            const costPerHour = localStorage.getItem('costPerHour');
+            const costPerDay = localStorage.getItem('costPerDay');
 
-        document.getElementById('roomName').innerText = roomName + "   " + roomSize + " sq.m";
+            if (totalWattage && costPerHour && costPerDay) {
+                document.getElementById('totalWattage').textContent = totalWattage;
+                document.getElementById('costPerHour').textContent = costPerHour;
+                document.getElementById('costPerDay').textContent = costPerDay;
+            }
 
-        var selectedDevices = JSON.parse(localStorage.getItem('selectedDevices'));
-        var devices = selectedDevices.selectedDevices;
+            var roomName = sessionStorage.getItem('roomName');
+            var roomSize = sessionStorage.getItem('roomSize');
 
-        const selectedDevicesList = document.getElementById('selectedDevicesList');
-        devices.forEach(device => {
-            const listItem = document.createElement('li');
-            listItem.classList.add('list-group-item');
-            listItem.innerHTML = `<b>${device.name}</b> - จำนวน: ${device.quantity}, รวมวัตต์: ${device.watt} watt`;
-            selectedDevicesList.appendChild(listItem);
+            document.getElementById('roomName').innerText = roomName + " " + roomSize + " sq.m";
+
+            var selectedDevices = JSON.parse(localStorage.getItem('selectedDevices'));
+            var devices = selectedDevices.selectedDevices;
+
+            const selectedDevicesList = document.getElementById('selectedDevicesList');
+            devices.forEach(device => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('list-group-item');
+                listItem.innerHTML = `<b>${device.name}</b> - จำนวน: ${device.quantity}, รวมวัตต์: ${device.watt} watt`;
+                selectedDevicesList.appendChild(listItem);
+            });
         });
     </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
