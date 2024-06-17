@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,7 +13,8 @@
 <body>
     <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">LuxSolar.EN</a>
+            <a href="/"
+                class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">LuxSolar.EN</a>
             <ul class="nav nav-pills">
                 <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
             </ul>
@@ -34,9 +36,11 @@
                         <h3 class="card-title" id="roomName"></h3>
                         <p class="card-text" id="roomSize"></p>
                         <p class="card-text">วัตต์รวม : <span id="totalWattage">0</span> วัตต์ / ชั่วโมง</p>
-                        <p class="card-text">ค่าไฟ <span id="costPerHour">0</span> บาท/ชั่วโมง : ค่าไฟ <span id="costPerDay">0</span> บาท/วัน</p>
+                        <p class="card-text">ค่าไฟ <span id="costPerHour">0</span> บาท/ชั่วโมง : ค่าไฟ <span
+                                id="costPerDay">0</span> บาท/วัน</p>
                         <h3 class="card-title">ข้อมูลแผงโซลาร์เซลล์ที่เลือก</h3>
-                        <p class="card-text">ขนาด <span id="panelSize"></span> วัตต์ : จำนวน <span id="panelQuantity"></span> แผง </p>
+                        <p class="card-text">ขนาด <span id="panelSize"></span> วัตต์ : จำนวน <span
+                                id="panelQuantity"></span> แผง </p>
                         <p class="card-text">กำลังไฟฟ้าที่สามารถผลิตได้ : <span id="totalPower"></span> วัตต์</p>
                         <p class="card-text">ราคาแผงโซลาร์เซลล์ทั้งหมด : <span id="totalPrice"></span> บาท</p>
                         <h3 class="card-title">ข้อมูลแบตเตอรี่และอินเวอร์เตอร์ที่เลือก</h3>
@@ -49,7 +53,8 @@
         </div><br /><br />
 
         <div class="px-4 py-2 text-center">
-            <a id="next-button" class="btn btn-outline-success btn-lg px-4 rounded-pill" type="button" href="index.html" onclick="checkCalculation()"> Home > </a>
+            <a id="next-button" class="btn btn-outline-success btn-lg px-4 rounded-pill" type="button" href="index.html"
+                onclick="checkCalculation()"> Home > </a>
         </div>
 
         <footer class="py-3 my-4">
@@ -59,7 +64,7 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const totalWattage = localStorage.getItem('totalWattage');
             const costPerHour = localStorage.getItem('costPerHour');
             const costPerDay = localStorage.getItem('costPerDay');
@@ -69,7 +74,7 @@
             const totalPrice = localStorage.getItem('totalPrice');
             const batterySize = localStorage.getItem('batterySize');
             const inverterSize = localStorage.getItem('inverterSize');
-            const totalCost = localStorage.getItem('totalPrice');
+            const totalCost = localStorage.getItem('totalCost');
 
             if (totalWattage && costPerHour && costPerDay) {
                 document.getElementById('totalWattage').textContent = totalWattage;
@@ -94,10 +99,23 @@
                 document.getElementById('inverterSize').textContent = inverterSize;
                 document.getElementById('totalCost').textContent = totalCost;
             }
+
+            document.addEventListener('DOMContentLoaded', function () {
+                const batterySize = localStorage.getItem('batterySize');
+                const inverterSize = localStorage.getItem('inverterSize');
+                const totalCost = localStorage.getItem('totalCost');
+
+                if (batterySize && inverterSize && totalCost) {
+                    document.getElementById('batterySize').textContent = batterySize + ' Ah';
+                    document.getElementById('inverterSize').textContent = inverterSize + ' วัตต์';
+                    document.getElementById('totalCost').textContent = totalCost + ' บาท';
+                }
+            });
         });
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>
