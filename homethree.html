@@ -72,7 +72,7 @@
           }
       }
     </style>
-
+    
 </head>
 <body>
     <div class="container">
@@ -125,8 +125,9 @@
         </div>
 
         <div class="px-4 py-2 text-center">
-            <a id="nextButton" class="btn btn-outline-success btn-lg px-4 rounded-pill" type="button" onclick="saveSelection()"> Next > </a>
+            <a id="next-button" class="btn btn-outline-success btn-lg px-4 rounded-pill" type="button" href="homebat.html" onclick="checkCalculation()"> Next > </a>
         </div>
+
 
         <footer class="py-3 my-4">
             <ul class="px-4 py-2 text-center"></ul>
@@ -174,10 +175,16 @@
                 return;
             }
 
+            const panelPrice = panelSize.value == 250 ? 2900 : 3200;
+            const totalPrice = panelPrice * panelQuantity;
+            const totalPower = panelSize.value * panelQuantity;
+
             localStorage.setItem('panelSize', panelSize.value);
             localStorage.setItem('panelQuantity', panelQuantity);
+            localStorage.setItem('totalPrice', totalPrice);
+            localStorage.setItem('totalPower', totalPower);
 
-            window.location.href = 'homebat.html';
+            window.location.href = 'homesum.html';
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {

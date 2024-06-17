@@ -105,23 +105,19 @@
                 const totalPrice = batteryPrices[batterySize] + inverterPrices[inverterSize];
                 document.getElementById('total-price').textContent = `รวมราคาสินค้า : ${totalPrice} บาท`;
                 priceCalculated = true;
+
+                // Save selections and total price to localStorage
+                localStorage.setItem('batterySize', batterySize);
+                localStorage.setItem('inverterSize', inverterSize);
+                localStorage.setItem('totalPrice', totalPrice);
             } else {
                 document.getElementById('total-price').textContent = 'กรุณาเลือกขนาดของแบตเตอรี่และอินเวอร์เตอร์';
                 priceCalculated = false;
             }
         }
 
-        function saveSelections() {
-            const batterySize = document.getElementById('battery-size').value;
-            const inverterSize = document.getElementById('inverter-size').value;
-
-            localStorage.setItem('batterySize', batterySize);
-            localStorage.setItem('inverterSize', inverterSize);
-        }
-
         function checkCalculation() {
             if (priceCalculated) {
-                saveSelections();
                 document.getElementById('next-button').href = "homesum.html";
             } else {
                 alert('กรุณาคำนวณราคาก่อนที่จะไปหน้าถัดไป');

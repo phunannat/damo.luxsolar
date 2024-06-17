@@ -31,20 +31,45 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title" id="roomName"></h4>
-                        <p  class="card-text" id="roomSize"></p>
-                        <p  class="card-text">วัตต์รวม : <span id="totalWattage">0</span> วัตต์ / ชั่วโมง</p>
-                        <p  class="card-text">ค่าไฟ <span id="costPerHour">0</span> บาท/ชั่วโมง : ค่าไฟ <span id="costPerDay">0</span> บาท/วัน</p>
+                        <h3 class="card-title" id="roomName"></h3>
+                        <p class="card-text" id="roomSize"></p>
+                        <p class="card-text">วัตต์รวม : <span id="totalWattage">0</span> วัตต์ / ชั่วโมง</p>
+                        <p class="card-text">ค่าไฟ <span id="costPerHour">0</span> บาท/ชั่วโมง : ค่าไฟ <span id="costPerDay">0</span> บาท/วัน</p>
+                        <h3 class="card-title">ข้อมูลแผงโซลาร์เซลล์ที่เลือก</h3>
+                        <p class="card-text">ขนาด <span id="panelSize"></span> วัตต์ : จำนวน <span id="panelQuantity"></span> แผง </p>
+                        <p class="card-text">กำลังไฟฟ้าที่สามารถผลิตได้ : <span id="totalPower"></span> วัตต์</p>
+                        <p class="card-text">ราคาแผงโซลาร์เซลล์ทั้งหมด : <span id="totalPrice"></span> บาท</p>
+                        <h3 class="card-title">ข้อมูลแบตเตอรี่และอินเวอร์เตอร์ที่เลือก</h3>
+                        <p class="card-text">ขนาดแบตเตอรี่ : <span id="batterySize"></span> Ah</p>
+                        <p class="card-text">ขนาดอินเวอร์เตอร์ : <span id="inverterSize"></span> วัตต์</p>
+                        <p class="card-text">ราคาทั้งหมด : <span id="totalCost"></span> บาท</p>
                     </div>
                 </div>
             </div>
+        </div><br /><br />
+
+        <div class="px-4 py-2 text-center">
+            <a id="next-button" class="btn btn-outline-success btn-lg px-4 rounded-pill" type="button" href="index.html" onclick="checkCalculation()"> Home > </a>
         </div>
+
+        <footer class="py-3 my-4">
+            <ul class="px-4 py-2 text-center"></ul>
+            <p class="text-center text-body-secondary"><br />© 2023 SCHOOL OF ENGINEERING<br /> BANGKOK UNIVERSITY</p>
+        </footer>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const totalWattage = localStorage.getItem('totalWattage');
             const costPerHour = localStorage.getItem('costPerHour');
             const costPerDay = localStorage.getItem('costPerDay');
+            const panelSize = localStorage.getItem('panelSize');
+            const panelQuantity = localStorage.getItem('panelQuantity');
+            const totalPower = localStorage.getItem('totalPower');
+            const totalPrice = localStorage.getItem('totalPrice');
+            const batterySize = localStorage.getItem('batterySize');
+            const inverterSize = localStorage.getItem('inverterSize');
+            const totalCost = localStorage.getItem('totalPrice');
 
             if (totalWattage && costPerHour && costPerDay) {
                 document.getElementById('totalWattage').textContent = totalWattage;
@@ -57,16 +82,18 @@
 
             document.getElementById('roomName').innerText = roomName + " " + roomSize + " sq.m";
 
-            var selectedDevices = JSON.parse(localStorage.getItem('selectedDevices'));
-            var devices = selectedDevices.selectedDevices;
+            if (panelSize && panelQuantity && totalPower && totalPrice) {
+                document.getElementById('panelSize').textContent = panelSize;
+                document.getElementById('panelQuantity').textContent = panelQuantity;
+                document.getElementById('totalPower').textContent = totalPower;
+                document.getElementById('totalPrice').textContent = totalPrice;
+            }
 
-            const selectedDevicesList = document.getElementById('selectedDevicesList');
-            devices.forEach(device => {
-                const listItem = document.createElement('li');
-                listItem.classList.add('list-group-item');
-                listItem.innerHTML = `<b>${device.name}</b> - จำนวน: ${device.quantity}, รวมวัตต์: ${device.watt} watt`;
-                selectedDevicesList.appendChild(listItem);
-            });
+            if (batterySize && inverterSize && totalCost) {
+                document.getElementById('batterySize').textContent = batterySize;
+                document.getElementById('inverterSize').textContent = inverterSize;
+                document.getElementById('totalCost').textContent = totalCost;
+            }
         });
     </script>
 
